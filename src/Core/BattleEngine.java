@@ -360,7 +360,10 @@ public class BattleEngine {
 		return speed[number];
 	}
 
-	public void Fight(Method attack1, Method attack2, Entity player , Entity player2, Testrun t) {
+	//This method takes input from each player. It then compares their speed and then executes a method from in order of who has the highest speed
+	// E.G if player1 is a Warrior. It would do player1.invokeability(1,player2, t).
+	//Warrior should be a subclass of Entity. I'm trying to make it so that i can input player into the entity field and have it grab Warrior.player, not entity.player
+	public void Fight(int attack1, int attack2, Entity player , Entity player2, Testrun t) {
 	
 
 		
