@@ -6,10 +6,10 @@ public class Ninja extends Entity{
 
 	public Ninja(String name) {
 		
-		super();
-		this.setEntityclass("Ninja");
+		super("A.I", "Ninja");
+
 		this.setName(name);
-		this.fillstats();
+		this.getClass().asSubclass(Entity.class);
 		
 }
 
