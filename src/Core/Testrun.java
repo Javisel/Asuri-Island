@@ -12,8 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
-import Classes.Ninja;
+import Classes.Marksman;
 import Classes.Warrior;
 
 
@@ -35,21 +36,21 @@ public class Testrun extends Applet implements ActionListener {
 	JButton ability2 = new JButton("");
 	JButton ability3 = new JButton("");
 	JButton Ultimate = new JButton("");
-	
+	public boolean canattack = true;
 	JTextPane playerstatstext = new JTextPane();
 	
-	Warrior player = new Warrior("Fenix");
+	Marksman player = new Marksman("Fenix");
 	
 
-
-	Ninja player2 = new Ninja("JACK");
+	Timer Timer = new Timer();
+	Marksman player2 = new Marksman("A.I");
 	JLabel playername = new JLabel(player.getName()+ " - " + B.classname(player.classnumber()));
 	JLabel player2name = new JLabel(player2.getName()+ " - " + B.classname(player2.getClassnumber()));
 	
 	
 	JProgressBar playerhealthbar = new JProgressBar();
 	JProgressBar player2healthbar = new JProgressBar();
-	Timer Timer = new Timer();
+
 	JProgressBar playermanabar = new JProgressBar();
 
 
@@ -67,7 +68,7 @@ public class Testrun extends Applet implements ActionListener {
 		System.out.println("and this far");
 		
 		player2.fillstats();
-
+		
 	
 		this.setSize(1074, 626);
 		this.setVisible(true);
@@ -99,7 +100,7 @@ public class Testrun extends Applet implements ActionListener {
 		playerhealthbar.setBackground(Color.BLACK);
 		playerhealthbar.setValue((int) ((player.getHP() / player.getMaxhp()) * 100));
 		playerhealthbar.setMinimum(0);
-		add(playerhealthbar);
+	
 		player2healthbar.setBounds(303, 104, 620, 14);
 
 	
@@ -107,12 +108,11 @@ public class Testrun extends Applet implements ActionListener {
 		player2healthbar.setBackground(Color.BLACK);
 		player2healthbar.setValue((int) ((player2.getHP() / player2.getMaxhp()) * 100));
 		player2healthbar.setMinimum(0);
-		add(player2healthbar);
+		
 		title.setBounds(579, 21, 149, 14);
 		
 		add(title);
 		playermanabar.setBounds(303, 442, 620, 14);
-
 
 		playermanabar.setStringPainted(true);
 		playerhealthbar.setStringPainted(true);
@@ -124,11 +124,14 @@ public class Testrun extends Applet implements ActionListener {
 		add(ability2);
 		add(ability3);
 		add(Ultimate);
+		add(playerhealthbar);
+		add(player2healthbar);
+		add(playermanabar);
 		
 		;
 	
 		playermanabar.setBackground(new Color(0, 0, 0));
-		add(playermanabar);
+	
 		getCombatinfo().setBounds(303, 458, 620, 48);
 		
 		
@@ -276,45 +279,44 @@ playerstatstext.setText(" Player Stats \n" + " Basic Attack Damage: " + player.c
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		if (canattack) {
 		if (e.getSource() == basicattack) {
 		
-			player.invokeability(0, player2, this);
+			B.Fight(0, (int) (Math.random() * 5) + 1 - 1, player, player2, this);
 			
-			player2.attacks();
 		}
 
 		if (e.getSource() == ability1) {
 		
-			player.invokeability(1, player2, this);
+			B.Fight(1,(int) (Math.random() * 5) + 1 - 1, player, player2, this);
 
-			player2.attacks();
 		
 		}
 		if (e.getSource() == ability2) {
 			
-			player.invokeability(2, player2, this);
+			B.Fight(2, (int) (Math.random() * 5) + 1 - 1, player, player2, this);
 
-			player2.attacks();
 		
 		}
 		if (e.getSource() == ability3) {
 			
-			player.invokeability(3, player2, this);
-			
+			B.Fight(3, (int) (Math.random() * 5) + 1 - 1, player, player2, this);
 
-			player2.attacks();
 		
 			
 		}
 		if (e.getSource() == Ultimate) {
 			
-			player.invokeability(4, player2, this);
-			
+			B.Fight(4, (int) (Math.random() * 5) + 1 - 1, player, player2, this);
 
-			player2.attacks();
 		
 		}
 
+		}
+		
+		else {
+			
+		}
 	}
 
 
